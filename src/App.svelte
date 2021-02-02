@@ -1,25 +1,19 @@
 <script>
+	import Nested from "./Nested.svelte";
+	import DomEvent from "./DomEvent.svelte";
+
 	export let name;
-	export let john;
+	export let author;
 
 	let count = 1;
+
+	$: doubled = count * 2;
+	$: quadrupled = doubled * 2;
 
 	function handleClick() {
 		count += 1;
 	}
-
 </script>
-
-<main>
-	<h1>Hello {name}!</h1>
-	<h3>My name {john}</h3>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-	<p>
-	<button on:click={handleClick}>Clicked {count}
-		{count === 1 ? 'time' : 'times'}
-	</button>
-	</p>
-</main>
 
 <style>
 	main {
@@ -42,3 +36,27 @@
 		}
 	}
 </style>
+
+<main>
+	<h1>Hello {name}!</h1>
+	<h3>hi, i am {author}</h3>
+	<p>
+		Visit the
+		<a href="https://svelte.dev/tutorial">Svelte tutorial</a>
+		to learn how to build Svelte apps.
+	</p>
+	<p>
+		<button on:click={handleClick}>Clicked
+			{count}
+			{count === 1 ? 'time' : 'times'}
+		</button>
+	</p>
+	<p>{count} * 2 = {doubled}</p>
+	<p>{count} * 2 = {quadrupled}</p>
+	<p>
+		<Nested propsname={doubled + quadrupled} />
+	</p>
+	<p>
+		<DomEvent />
+	</p>
+</main>
